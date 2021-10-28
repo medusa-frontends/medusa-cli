@@ -15,4 +15,14 @@ program.command('test').action(async () => {
   })
 })
 
-program.parseAsync(process.argv)
+program.on('error', (error) => console.log(error))
+
+export async function bootstrap() {
+  try {
+    await program.parseAsync(process.argv)
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message)
+    }
+  }
+}

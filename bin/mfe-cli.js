@@ -1,2 +1,3 @@
 #!/usr/bin/env node
-require('./build.js')
+const { bootstrap } = require('./build.js')
+bootstrap()
