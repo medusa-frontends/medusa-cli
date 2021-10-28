@@ -6,15 +6,34 @@
   "repository": "git@github.com:mfe-playground/mfe-cli.git",
   "author": "Evgeny Zakharov <risenforces@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">= 14.8.0",
+    "npm": ">= 5.5.1"
+  },
+  "bin": {
+    "mfe-cli": "bin/mfe-cli.js"
+  },
   "scripts": {
     "build": "rollup -c rollup.config.js"
   },
   "devDependencies": {
+    "@eslint-kit/eslint-config-base": "^5.0.2",
+    "@eslint-kit/eslint-config-node": "^2.0.0",
+    "@eslint-kit/eslint-config-patch": "^1.0.0",
+    "@eslint-kit/eslint-config-prettier": "^4.0.0",
+    "@eslint-kit/eslint-config-typescript": "^5.1.0",
+    "@typescript-eslint/parser": "4.15.0",
     "esbuild": "^0.13.9",
+    "eslint": "7.10.0",
+    "prettier": "2.3.0",
     "rollup": "^2.58.3",
     "rollup-plugin-dts": "^4.0.0",
     "rollup-plugin-esbuild": "^4.6.0",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "commander": "^8.3.0",
+    "zx": "^4.2.0"
   }
 }

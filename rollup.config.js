@@ -1,9 +1,6 @@
 import { defineConfig } from 'rollup'
-import dts from 'rollup-plugin-dts'
 import esbuild from 'rollup-plugin-esbuild'
 import { terser } from 'rollup-plugin-terser'
-
-const name = require('./package.json').main.replace(/\.js$/, '')
 
 const bundle = (config) =>
   defineConfig({
@@ -17,24 +14,11 @@ const config = defineConfig([
     plugins: [esbuild(), terser()],
     output: [
       {
-        file: `${name}.js`,
+        file: `bin/build.js`,
         format: 'cjs',
-        sourcemap: true,
-      },
-      {
-        file: `${name}.mjs`,
-        format: 'es',
-        sourcemap: true,
       },
     ],
-  }),
-  bundle({
-    plugins: [dts()],
-    output: {
-      file: `${name}.d.ts`,
-      format: 'es',
-    },
-  }),
+  })
 ])
 
 export default config

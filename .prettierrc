@@ -1,0 +1,14 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "quoteProps": "consistent",
+  "endOfLine": "lf",
+  "importOrder": [
+    "^[./]"
+  ],
+  "experimentalBabelParserPluginsList": [
+    "jsx",
+    "typescript"
+  ]
+}
