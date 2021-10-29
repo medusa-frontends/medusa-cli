@@ -46,6 +46,7 @@ export async function foreachApp(options: ForeachAppOptions) {
     const config = await readFinalConfig<AppConfig>({
       name: 'mfe-app',
       directory: appPath,
+      default: { build: './dist' },
     })
 
     await callback({ files, config })

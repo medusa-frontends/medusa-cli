@@ -38,16 +38,22 @@ async function readConfig<T extends CLIConfig | AppConfig>(
   }
 }
 
-interface ReadFinalConfigOptions {
+interface ReadFinalConfigOptions<T> {
   name: string
   directory?: string
+  default: T
   atLeastOne?: boolean
 }
 
 export async function readFinalConfig<T extends CLIConfig | AppConfig>(
-  options: ReadFinalConfigOptions
+  options: ReadFinalConfigOptions<T>
 ): Promise<T> {
-  const { name, directory = ROOT, atLeastOne = true } = options
+  const {
+    name,
+    directory = ROOT,
+    default: defaultConfig,
+    atLeastOne = true,
+  } = options
 
   const commonPath = path.join(directory, `./${name}.common.json`)
   const customPath = path.join(directory, `./${name}.json`)
@@ -59,7 +65,7 @@ export async function readFinalConfig<T extends CLIConfig | AppConfig>(
     throw new Error(`At least one valid "${name}" config is required`)
   }
 
-  const commonValue = common ?? {}
+  const commonValue = common ?? defaultConfig
   const customValue = custom ?? {}
-  return { ...commonValue, ...customValue } as T
+  return { ...commonValue, ...customValue }
 }
