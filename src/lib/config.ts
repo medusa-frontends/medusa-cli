@@ -1,14 +1,6 @@
 import 'zx/globals'
+import { AppConfig, CLIConfig } from '../types'
 import { ROOT } from './fs'
-
-export interface CLIConfig {
-  apps?: string[]
-  branches?: Record<string, string>
-}
-
-export interface AppConfig {
-  build: string
-}
 
 interface ReadConfigOptions<T> {
   defaultValue?: T

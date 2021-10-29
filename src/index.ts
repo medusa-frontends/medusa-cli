@@ -1,7 +1,8 @@
 import { program } from 'commander'
 import 'zx/globals'
-import { CLIConfig, readFinalConfig } from './lib/config'
+import { readFinalConfig } from './lib/config'
 import { foreachApp } from './lib/foreach-app'
+import { CLIConfig } from './types'
 
 program.command('test').action(async () => {
   const config = await readFinalConfig<CLIConfig>({
