@@ -15,8 +15,6 @@ program.command('test').action(async () => {
   })
 })
 
-program.on('error', (error) => console.log(error))
-
 export async function bootstrap() {
   try {
     await program.parseAsync(process.argv)

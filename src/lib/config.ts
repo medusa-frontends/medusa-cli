@@ -14,14 +14,7 @@ interface ReadConfigOptions<T> {
   defaultValue?: T
 }
 
-type ReadConfigResult<T> =
-  | {
-      valid: true
-      value: T
-    }
-  | {
-      valid: false
-    }
+type ReadConfigResult<T> = T | null
 
 async function readConfig<T extends CLIConfig | AppConfig>(
   path: string,
@@ -34,16 +27,14 @@ async function readConfig<T extends CLIConfig | AppConfig>(
   try {
     buffer = await fs.readFile(path)
   } catch {
-    return defaultValue
-      ? { valid: true, value: defaultValue }
-      : { valid: false }
+    return defaultValue ?? null
   }
 
   try {
     const json = buffer.toString()
-    return { valid: true, value: JSON.parse(json) }
+    return JSON.parse(json)
   } catch {
-    return { valid: false }
+    return null
   }
 }
 
@@ -64,11 +55,11 @@ export async function readFinalConfig<T extends CLIConfig | AppConfig>(
   const common = await readConfig<T>(commonPath)
   const custom = await readConfig<T>(customPath)
 
-  if (atLeastOne && !common.valid && !custom.valid) {
+  if (atLeastOne && !common && !custom) {
     throw new Error(`At least one valid "${name}" config is required`)
   }
 
-  const commonValue = common.valid ? common.value : {}
-  const customValue = custom.valid ? custom.value : {}
+  const commonValue = common ?? {}
+  const customValue = custom ?? {}
   return { ...commonValue, ...customValue } as T
 }
