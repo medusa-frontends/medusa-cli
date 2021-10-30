@@ -1,6 +1,6 @@
 export interface CLIConfig {
-  apps?: string[]
-  branches?: Record<string, string>
+  apps: string[]
+  branches: Record<string, string>
 }
 
 export interface AppConfig {

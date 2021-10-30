@@ -37,7 +37,7 @@ interface ReadFinalConfigOptions<T> {
   atLeastOne?: boolean
 }
 
-export async function readFinalConfig<T extends CLIConfig | AppConfig>(
+async function readFinalConfig<T extends CLIConfig | AppConfig>(
   options: ReadFinalConfigOptions<T>
 ): Promise<T> {
   const {
@@ -61,3 +61,19 @@ export async function readFinalConfig<T extends CLIConfig | AppConfig>(
   const customValue = custom ?? {}
   return { ...commonValue, ...customValue }
 }
+
+export const readAppConfig = (app: string) =>
+  readFinalConfig<AppConfig>({
+    name: 'mfe-app',
+    directory: path.join(ROOT, app),
+    default: { build: './dist' },
+  })
+
+export const readCLIConfig = () =>
+  readFinalConfig<CLIConfig>({
+    name: 'mfe-cli',
+    default: {
+      apps: [],
+      branches: {},
+    },
+  })

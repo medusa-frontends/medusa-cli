@@ -1,6 +1,6 @@
 import 'zx/globals'
-import { AppConfig, AppMeta } from '../types'
-import { readFinalConfig } from './config'
+import { AppMeta } from '../types'
+import { readAppConfig } from './config'
 import { ROOT } from './fs'
 
 export async function getAppMeta(app: string): Promise<AppMeta | null> {
@@ -19,11 +19,7 @@ export async function getAppMeta(app: string): Promise<AppMeta | null> {
 
   const files = await fs.readdir(appPath)
 
-  const config = await readFinalConfig<AppConfig>({
-    name: 'mfe-app',
-    directory: appPath,
-    default: { build: './dist' },
-  })
+  const config = await readAppConfig(app)
 
   return {
     app,

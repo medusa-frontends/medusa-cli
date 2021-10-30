@@ -1,18 +1,26 @@
 import { program } from 'commander'
 import 'zx/globals'
-import { readFinalConfig } from './lib/config'
+import { readCLIConfig } from './lib/config'
 import { foreachApp } from './lib/foreach-app'
-import { CLIConfig } from './types'
+
+program.command('fetch').action(async () => {
+  const { apps, branches } = await readCLIConfig()
+
+  for (const app of apps) {
+    const branch = branches[app]
+
+    if (branch) {
+      await $`git config submodule.${app}.branch ${branch}`
+    }
+
+    await $`git submodule update --remote ${app}`
+  }
+})
 
 program.command('test').action(async () => {
-  const config = await readFinalConfig<CLIConfig>({
-    name: 'mfe-cli',
-    default: {},
-  })
+  const { apps } = await readCLIConfig()
 
-  const { apps = [] } = config
-
-  console.log(config)
+  console.log({ apps })
 
   await foreachApp({
     apps,
