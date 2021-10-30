@@ -3,7 +3,7 @@ import 'zx/globals'
 import { readCLIConfig } from './lib/config'
 import { foreachApp } from './lib/foreach-app'
 
-program.command('fetch').action(async () => {
+program.command('pull').action(async () => {
   const { apps, branches } = await readCLIConfig()
 
   for (const app of apps) {
@@ -17,15 +17,31 @@ program.command('fetch').action(async () => {
   }
 })
 
-program.command('test').action(async () => {
+program.command('install').action(async () => {
   const { apps } = await readCLIConfig()
-
-  console.log({ apps })
 
   await foreachApp({
     apps,
-    callback: console.log,
+    callback: async ({ app }) => {
+      await $`cd ${app}; yarn install`
+    },
   })
+})
+
+program.command('start').action(async () => {
+  const { apps } = await readCLIConfig()
+
+  await Promise.all([
+    apps.map((app) => $`cd ${app}; yarn prestart; yarn start`),
+  ])
+})
+
+program.command('start:prod').action(async () => {
+  const { apps } = await readCLIConfig()
+
+  await Promise.all([
+    apps.map((app) => $`cd ${app}; yarn prestart:prod; yarn start:prod`),
+  ])
 })
 
 export async function bootstrap() {
