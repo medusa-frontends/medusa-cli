@@ -1,9 +1,18 @@
 import 'zx/globals'
-import { AppMeta } from '../types'
-import { readAppConfig } from './config'
-import { ROOT } from './fs'
+import { AppMeta, PackageJson } from '../types'
+import { readAppConfig, readCLIConfig } from './config'
+import { readJson, ROOT } from './fs'
 
-export async function getAppMeta(app: string): Promise<AppMeta | null> {
+type PassedFields = Partial<AppMeta>
+
+export async function getAppMeta(
+  app: string,
+  passedFields: PassedFields = {}
+): Promise<AppMeta | null> {
+  const { branches } = await readCLIConfig()
+
+  const branch = branches[app]
+
   const appPath = path.join(ROOT, app)
   const exists = await fs.pathExists(appPath)
 
@@ -19,12 +28,27 @@ export async function getAppMeta(app: string): Promise<AppMeta | null> {
 
   const files = await fs.readdir(appPath)
 
+  if (!files.includes('package.json')) {
+    return null
+  }
+
+  const packageJson = await readJson<PackageJson>(
+    path.join(appPath, 'package.json')
+  )
+
+  if (!packageJson) {
+    return null
+  }
+
   const config = await readAppConfig(app)
 
   return {
     app,
     files,
     config,
+    packageJson,
+    branch,
+    ...passedFields,
   }
 }
 

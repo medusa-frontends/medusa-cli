@@ -8,6 +8,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "@typescript-eslint/consistent-type-definitions": ["warn", "type"]
   }
 }

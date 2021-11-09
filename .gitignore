@@ -1,5 +1,5 @@
 node_modules
-bin/build.js
+bin/bootstrap.js
 
 .idea
 .DS_Store

@@ -2,12 +2,12 @@
   "name": "@mfe/cli",
   "version": "0.0.0",
   "description": "A CLI interface for bootstrapping and managing MFEs",
-  "main": "dist/index.js",
+  "main": "bin/mfe-cli.js",
   "repository": "git@github.com:mfe-playground/mfe-cli.git",
   "author": "Evgeny Zakharov <risenforces@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": ">= 14.8.0",
+    "node": ">= 14.13.1",
     "npm": ">= 5.5.1"
   },
   "bin": {
@@ -22,18 +22,25 @@
     "@eslint-kit/eslint-config-patch": "^1.0.0",
     "@eslint-kit/eslint-config-prettier": "^4.0.0",
     "@eslint-kit/eslint-config-typescript": "^5.1.0",
+    "@types/blessed": "^0.1.19",
+    "@types/merge-deep": "^3.0.0",
     "@typescript-eslint/parser": "4.15.0",
     "esbuild": "^0.13.9",
     "eslint": "7.10.0",
     "prettier": "2.3.0",
-    "rollup": "^2.58.3",
+    "rollup": "^2.59.0",
     "rollup-plugin-dts": "^4.0.0",
     "rollup-plugin-esbuild": "^4.6.0",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "blessed": "^0.1.81",
+    "change-case": "^4.1.2",
     "commander": "^8.3.0",
+    "find-free-ports": "^3.0.0",
+    "merge-deep": "^3.0.3",
+    "webpack": "^5.61.0",
     "zx": "^4.2.0"
   }
 }

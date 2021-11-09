@@ -5,7 +5,7 @@ import { terser } from 'rollup-plugin-terser'
 const bundle = (config) =>
   defineConfig({
     ...config,
-    input: 'src/index.ts',
+    input: 'src/bootstrap.ts',
     external: (id) => !/^[./]/.test(id),
   })
 
@@ -14,11 +14,11 @@ const config = defineConfig([
     plugins: [esbuild(), terser()],
     output: [
       {
-        file: `bin/build.js`,
+        file: `bin/bootstrap.js`,
         format: 'cjs',
       },
     ],
-  })
+  }),
 ])
 
 export default config

@@ -1,79 +1,92 @@
+import mergeDeep from 'merge-deep'
 import 'zx/globals'
 import { AppConfig, CLIConfig } from '../types'
-import { ROOT } from './fs'
+import { AtLeastOneConfigException } from './exceptions'
+import { readJson, ROOT } from './fs'
 
-interface ReadConfigOptions<T> {
-  defaultValue?: T
-}
-
-type ReadConfigResult<T> = T | null
-
-async function readConfig<T extends CLIConfig | AppConfig>(
-  path: string,
-  options: ReadConfigOptions<T> = {}
-): Promise<ReadConfigResult<T>> {
-  const { defaultValue } = options
-
-  let buffer: Buffer
-
-  try {
-    buffer = await fs.readFile(path)
-  } catch {
-    return defaultValue ?? null
-  }
-
-  try {
-    const json = buffer.toString()
-    return JSON.parse(json)
-  } catch {
-    return null
-  }
-}
-
-interface ReadFinalConfigOptions<T> {
+type ReadFinalConfigOptions<T> = {
   name: string
   directory?: string
   default: T
   atLeastOne?: boolean
+  map?: (defaultConfig: T, commonConfig: T, customConfig: T) => T | Promise<T>
 }
 
-async function readFinalConfig<T extends CLIConfig | AppConfig>(
-  options: ReadFinalConfigOptions<T>
-): Promise<T> {
-  const {
-    name,
-    directory = ROOT,
-    default: defaultConfig,
-    atLeastOne = true,
-  } = options
-
+async function readFinalConfig<T extends CLIConfig | AppConfig>({
+  name,
+  directory = ROOT,
+  default: defaultConfig,
+  atLeastOne = true,
+  map = (defaultConfig, common, custom) => ({
+    ...defaultConfig,
+    ...common,
+    ...custom,
+  }),
+}: ReadFinalConfigOptions<T>): Promise<T> {
   const commonPath = path.join(directory, `./${name}.common.json`)
   const customPath = path.join(directory, `./${name}.json`)
 
-  const common = await readConfig<T>(commonPath)
-  const custom = await readConfig<T>(customPath)
+  const common = await readJson<T>(commonPath)
+  const custom = await readJson<T>(customPath)
 
   if (atLeastOne && !common && !custom) {
-    throw new Error(`At least one valid "${name}" config is required`)
+    throw new AtLeastOneConfigException(name)
   }
 
-  const commonValue = common ?? defaultConfig
-  const customValue = custom ?? {}
-  return { ...commonValue, ...customValue }
-}
+  const commonValue = common ?? ({} as T)
+  const customValue = custom ?? ({} as T)
 
-export const readAppConfig = (app: string) =>
-  readFinalConfig<AppConfig>({
-    name: 'mfe-app',
-    directory: path.join(ROOT, app),
-    default: { build: './dist' },
-  })
+  return map(defaultConfig, commonValue, customValue)
+}
 
 export const readCLIConfig = () =>
   readFinalConfig<CLIConfig>({
     name: 'mfe-cli',
     default: {
+      host: 'mfe-app-host',
       apps: [],
+      runOnlySpecifiedApps: false,
       branches: {},
+      appBase: {},
+      appConfigs: {},
+    },
+  })
+
+export const readAppConfig = (app: string) =>
+  readFinalConfig<AppConfig>({
+    name: 'mfe-app',
+    directory: path.join(ROOT, app),
+    default: {
+      requires: [],
+      buildPath: './dist',
+      exposesPath: './src/exposes',
+      shared: [],
+      env: {},
+      endpoint: {
+        https: false,
+        domain: 'localhost',
+        path: '',
+        fileName: 'remoteEntry.js',
+      },
+      scripts: {
+        'start': 'mfe:start',
+        'start:prod': 'mfe:start:prod',
+        'prestart': 'mfe:prestart',
+        'prestart:prod': 'mfe:prestart:prod',
+        'generate': 'mfe:generate',
+      },
+    },
+    map: async (defaultConfig, commonConfig, customConfig) => {
+      const { host, appBase, appConfigs } = await readCLIConfig()
+
+      return mergeDeep(
+        defaultConfig,
+        // host is always required
+        { requires: [host] },
+        appBase,
+        commonConfig,
+        appConfigs[app] ?? {},
+        customConfig
+      )
     },
   })
