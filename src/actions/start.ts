@@ -242,7 +242,7 @@ export async function start({
     logsBox.content =
       logs && logs.length > 0
         ? logs.join('\n')
-        : chalk.red(`No errors found for "${app}"`)
+        : chalk.red(`No ${logsType} found for "${app}"`)
   }
 
   textarea.key('enter', () => {
