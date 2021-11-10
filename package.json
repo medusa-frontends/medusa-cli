@@ -14,7 +14,8 @@
     "mfe-cli": "bin/mfe-cli.js"
   },
   "scripts": {
-    "build": "rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js",
+    "dev": "rollup -c rollup.config.js -w"
   },
   "devDependencies": {
     "@eslint-kit/eslint-config-base": "^5.0.2",
@@ -35,6 +36,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "@mfe/webpack-plugin": "file:../mfe-webpack-plugin",
     "blessed": "^0.1.81",
     "change-case": "^4.1.2",
     "commander": "^8.3.0",

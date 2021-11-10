@@ -323,6 +323,12 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@mfe/webpack-plugin@file:../mfe-webpack-plugin":
+  version "0.0.0"
+  dependencies:
+    find-package-json "^1.2.0"
+    webpack "^5.61.0"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://nexus-dev.pcbltools.ru/repository/npm-group/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -1595,6 +1601,11 @@ find-free-ports@^3.0.0:
   version "3.0.0"
   resolved "https://nexus-dev.pcbltools.ru/repository/npm-group/find-free-ports/-/find-free-ports-3.0.0.tgz#8cb33bc27065cbf2f53282eea6cb0587bb7e61d8"
   integrity sha512-C9XrjG5O1EWPHSjY/hzJaUAoyUQ+KhmiYn0zHohOpScSeWr5TqJu613iIvzI4DnIKpdcBZZ5B4ifiUA10Y2HuA==
+
+find-package-json@^1.2.0:
+  version "1.2.0"
+  resolved "https://nexus-dev.pcbltools.ru/repository/npm-group/find-package-json/-/find-package-json-1.2.0.tgz#4057d1b943f82d8445fe52dc9cf456f6b8b58083"
+  integrity sha512-+SOGcLGYDJHtyqHd87ysBhmaeQ95oWspDKnMXBrnQ9Eq4OkLNqejgoaD8xVWu6GPa0B6roa6KinCMEMcVeqONw==
 
 find-up@^2.0.0, find-up@^2.1.0:
   version "2.1.0"

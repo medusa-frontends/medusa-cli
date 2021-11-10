@@ -1,3 +1,4 @@
+import { MESSAGES } from '@mfe/webpack-plugin'
 import blessed from 'blessed'
 import { ProcessOutput, ProcessPromise } from 'zx'
 import 'zx/globals'
@@ -335,19 +336,23 @@ export async function start({
       process.stdout.removeAllListeners()
       process.stderr.removeAllListeners()
 
-      const READY_REGEXP = /Project is running at:/
+      const statusMap = {
+        'Project is running at:': chalk.green('Ready'),
+        [MESSAGES.BEFORE_COMPILE()]: chalk.yellow('Compiling..'),
+        [MESSAGES.AFTER_COMPILE()]: chalk.green('Ready'),
+      }
 
       const handler = (logsType: LogsType) => (buffer: Buffer) => {
         const message = buffer.toString()
         const logs = registries[logsType][app] ?? []
-        logs.push(message)
         registries[logsType][app] = logs
-        if (message.match(READY_REGEXP)) {
-          api.status = chalk.green('Ready')
-        }
         api[logsType] += 1
         syncLogs(app, logsType)
         logsBox.setScrollPerc(100)
+        for (const [phrase, status] of Object.entries(statusMap)) {
+          if (!message.includes(phrase)) continue
+          api.status = status
+        }
         render()
       }
 

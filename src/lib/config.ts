@@ -1,14 +1,12 @@
 import mergeDeep from 'merge-deep'
 import 'zx/globals'
 import { AppConfig, CLIConfig } from '../types'
-import { AtLeastOneConfigException } from './exceptions'
 import { readJson, ROOT } from './fs'
 
 type ReadFinalConfigOptions<T> = {
   name: string
   directory?: string
   default: T
-  atLeastOne?: boolean
   map?: (defaultConfig: T, commonConfig: T, customConfig: T) => T | Promise<T>
 }
 
@@ -16,7 +14,6 @@ async function readFinalConfig<T extends CLIConfig | AppConfig>({
   name,
   directory = ROOT,
   default: defaultConfig,
-  atLeastOne = true,
   map = (defaultConfig, common, custom) => ({
     ...defaultConfig,
     ...common,
@@ -28,10 +25,6 @@ async function readFinalConfig<T extends CLIConfig | AppConfig>({
 
   const common = await readJson<T>(commonPath)
   const custom = await readJson<T>(customPath)
-
-  if (atLeastOne && !common && !custom) {
-    throw new AtLeastOneConfigException(name)
-  }
 
   const commonValue = common ?? ({} as T)
   const customValue = custom ?? ({} as T)

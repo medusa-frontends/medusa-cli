@@ -16,9 +16,3 @@ export class AppNotFoundException extends Error {
     )
   }
 }
-
-export class AtLeastOneConfigException extends Error {
-  constructor(name: string) {
-    super(`At least one valid "${name}" config is required`)
-  }
-}

@@ -38,12 +38,14 @@ export async function generatePluginOptions() {
 
   await foreachApp({
     apps,
+    deep: true,
     callback: async ({ app, config }) => {
       await withTempFolder(app, async (tempFolderPath) => {
         const optionsPath = path.join(tempFolderPath, FileNames.PluginOptions)
 
         const environment = await readEnvironment(app)
         if (!environment) throw new EnvironmentNotFoundException(app)
+
         const shared = await buildFinalShared(app)
 
         const exposes: Record<string, string> = {}
