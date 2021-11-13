@@ -1,9 +1,9 @@
 {
-  "name": "@mfe/cli",
+  "name": "@medusa/cli",
   "version": "0.0.0",
   "description": "A CLI interface for bootstrapping and managing MFEs",
-  "main": "bin/mfe-cli.js",
-  "repository": "git@github.com:mfe-playground/mfe-cli.git",
+  "main": "bin/medusa.js",
+  "repository": "git@github.com:mfe-playground/medusa-cli.git",
   "author": "Evgeny Zakharov <risenforces@gmail.com>",
   "license": "MIT",
   "engines": {
@@ -11,7 +11,7 @@
     "npm": ">= 5.5.1"
   },
   "bin": {
-    "mfe-cli": "bin/mfe-cli.js"
+    "medusa": "bin/medusa.js"
   },
   "scripts": {
     "build": "rollup -c rollup.config.js",
