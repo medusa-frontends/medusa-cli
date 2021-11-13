@@ -1,4 +1,4 @@
-import { MESSAGES } from '@mfe/webpack-plugin'
+import { MESSAGES } from '@medusa/webpack-plugin'
 import { ProcessOutput, ProcessPromise } from 'zx'
 import 'zx/globals'
 import { readEnvironment } from '../configs/environment'

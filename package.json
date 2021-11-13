@@ -37,7 +37,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@mfe/webpack-plugin": "file:../mfe-webpack-plugin",
+    "@medusa/webpack-plugin": "file:../medusa-webpack-plugin",
     "change-case": "^4.1.2",
     "commander": "^8.3.0",
     "effector": "^22.1.2",
