@@ -6,7 +6,7 @@ import { readCLIConfig } from '../lib/config'
 import { AppNotFoundException } from '../lib/exceptions'
 import { foreachApp } from '../lib/foreach-app'
 import { readJson, ROOT } from '../lib/fs'
-import { withTempFolder } from '../lib/temp-folder'
+import { TEMP_FOLDER_NAME, withTempFolder } from '../lib/temp-folder'
 import { log } from '../model/logs'
 import { TSConfig } from '../types'
 
@@ -95,21 +95,26 @@ async function getExposesPath(app: string): Promise<string | null> {
 
 const warnedApps = new Set<string>()
 
+function hasTempFolderInTypeRoots(app: string, tsconfig: TSConfig) {
+  const { typeRoots = [] } = tsconfig.compilerOptions ?? {}
+  const basePath = path.join(ROOT, app)
+  const tempFolderPath = path.join(basePath, TEMP_FOLDER_NAME)
+  return typeRoots.some((relative) => {
+    const typeRootPath = path.join(basePath, relative)
+    return typeRootPath === tempFolderPath
+  })
+}
+
 async function assertTypeRoots(app: string) {
   const alreadyWarned = warnedApps.has(app)
   if (alreadyWarned) return
   const tsconfigPath = path.join(ROOT, app, 'tsconfig.json')
   const tsconfig = await readJson<TSConfig>(tsconfigPath)
   if (!tsconfig) return
-  const expected = ['./.mfe', '.mfe', '/.mfe']
-  const shouldWarn =
-    !tsconfig.compilerOptions?.typeRoots ||
-    !tsconfig.compilerOptions.typeRoots.some((typeRoot) =>
-      expected.includes(typeRoot)
-    )
-  if (!shouldWarn) return
+  if (hasTempFolderInTypeRoots(app, tsconfig)) return
   log(
-    `[Warning] The app "${app}" tsconfig "typeRoots" field doesn't include ".mfe" directory`
+    `[Warning] The app "${app}" tsconfig "typeRoots" field` +
+      ` doesn't include "${TEMP_FOLDER_NAME}" directory`
   )
   warnedApps.add(app)
 }

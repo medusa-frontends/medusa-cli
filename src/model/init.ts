@@ -1,8 +1,12 @@
 import { forward } from 'effector'
 import { condition } from 'patronum'
-import { executionFailed, executionSucceed } from '.'
 import { $commandResultNotSet, showCommandResult } from './command-result'
-import { executionFinished, executionStarted } from './lifecycle'
+import {
+  executionFailed,
+  executionSucceed,
+  executionFinished,
+  executionStarted,
+} from './lifecycle'
 import { runProgramFx } from './run'
 import { setupFinished, startSetUp } from './setup'
 import { startShutDown } from './shut-down'
