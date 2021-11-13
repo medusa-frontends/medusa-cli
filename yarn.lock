@@ -323,7 +323,7 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@medusa/webpack-plugin@file:../mfe-webpack-plugin":
+"@medusa/webpack-plugin@file:../medusa-webpack-plugin":
   version "0.0.0"
   dependencies:
     find-package-json "^1.2.0"
