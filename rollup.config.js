@@ -5,7 +5,7 @@ import { terser } from 'rollup-plugin-terser'
 const bundle = (config) =>
   defineConfig({
     ...config,
-    input: 'src/bootstrap.ts',
+    input: 'src/bootstrap.tsx',
     external: (id) => !/^[./]/.test(id),
   })
 

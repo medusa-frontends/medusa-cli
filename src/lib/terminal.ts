@@ -28,13 +28,18 @@ function stringifyOptions(options: Options) {
     .join(' ')
 }
 
+export async function getAppScript(app: string, scriptKey: ScriptKey) {
+  return mapScriptKey(app, scriptKey)
+}
+
 export async function runAppScript(
   app: string,
   scriptKey: ScriptKey,
   options: Options = {}
 ) {
   const envString = await buildEnvString(app)
-  const script = await mapScriptKey(app, scriptKey)
+  const script = await getAppScript(app, scriptKey)
+
   return withoutQuotes(() => {
     return wrapZX(
       $`${envString} cd ${app}; yarn ${script} ${stringifyOptions(options)}`

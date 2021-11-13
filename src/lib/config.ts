@@ -62,10 +62,12 @@ export const readAppConfig = (app: string) =>
         fileName: 'remoteEntry.js',
       },
       scripts: {
-        'start': 'mfe:start',
-        'start:prod': 'mfe:start:prod',
         'prestart': 'mfe:prestart',
         'prestart:prod': 'mfe:prestart:prod',
+        'start': 'mfe:start',
+        'start:prod': 'mfe:start:prod',
+        'prebuild': 'mfe:prebuild',
+        'build': 'mfe:build',
         'generate': 'mfe:generate',
       },
     },
@@ -74,8 +76,7 @@ export const readAppConfig = (app: string) =>
 
       return mergeDeep(
         defaultConfig,
-        // host is always required
-        { requires: [host] },
+        { requires: [host] }, // host is always required
         appBase,
         commonConfig,
         appConfigs[app] ?? {},

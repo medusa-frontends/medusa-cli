@@ -3,7 +3,8 @@ import { generateExposesTypes } from '../configs/exposes'
 import { generatePluginOptions } from '../configs/plugin-options'
 import { readCLIConfig } from '../lib/config'
 import { foreachApp } from '../lib/foreach-app'
-import { runAppScriptIfPresent } from '../lib/terminal'
+import { appHasScript, getAppScript, runAppScript } from '../lib/terminal'
+import { showStatus } from '../model/status'
 
 async function runGenerateScripts() {
   const { apps } = await readCLIConfig()
@@ -12,16 +13,23 @@ async function runGenerateScripts() {
     apps,
     deep: true,
     callback: async ({ app }) => {
-      const wrapped = await runAppScriptIfPresent(app, 'generate')
-      if (!wrapped) return
+      const hasScript = await appHasScript(app, 'generate')
+      if (!hasScript) return
+      const script = await getAppScript(app, 'generate')
+      showStatus({ text: `Running script "${script}" for "${app}"` })
+      const wrapped = await runAppScript(app, 'generate')
       await wrapped.processPromise()
     },
   })
 }
 
 export async function generate() {
+  showStatus({ text: 'Creating environment..' })
   await generateEnvironment()
+  showStatus({ text: 'Creating plugin options..' })
   await generatePluginOptions()
+  showStatus({ text: 'Generating types..' })
   await generateExposesTypes()
+  showStatus({ text: 'Running scripts..' })
   await runGenerateScripts()
 }

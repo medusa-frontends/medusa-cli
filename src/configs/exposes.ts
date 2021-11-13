@@ -7,6 +7,7 @@ import { AppNotFoundException } from '../lib/exceptions'
 import { foreachApp } from '../lib/foreach-app'
 import { readJson, ROOT } from '../lib/fs'
 import { withTempFolder } from '../lib/temp-folder'
+import { log } from '../model/logs'
 import { TSConfig } from '../types'
 
 async function generateRequiresMap() {
@@ -107,7 +108,7 @@ async function assertTypeRoots(app: string) {
       expected.includes(typeRoot)
     )
   if (!shouldWarn) return
-  console.log(
+  log(
     `[Warning] The app "${app}" tsconfig "typeRoots" field doesn't include ".mfe" directory`
   )
   warnedApps.add(app)

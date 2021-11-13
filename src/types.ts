@@ -20,10 +20,12 @@ export type ExtendedShared = Record<string, DependencyOptions>
 export type Shared = string[] | ExtendedShared
 
 export type ScriptKey =
-  | 'start'
-  | 'start:prod'
   | 'prestart'
   | 'prestart:prod'
+  | 'start'
+  | 'start:prod'
+  | 'prebuild'
+  | 'build'
   | 'generate'
 
 export type AppConfig = {

@@ -25,6 +25,7 @@
     "@eslint-kit/eslint-config-typescript": "^5.1.0",
     "@types/blessed": "^0.1.19",
     "@types/merge-deep": "^3.0.0",
+    "@types/react": "^17.0.34",
     "@typescript-eslint/parser": "4.15.0",
     "esbuild": "^0.13.9",
     "eslint": "7.10.0",
@@ -37,11 +38,17 @@
   },
   "dependencies": {
     "@mfe/webpack-plugin": "file:../mfe-webpack-plugin",
-    "blessed": "^0.1.81",
     "change-case": "^4.1.2",
     "commander": "^8.3.0",
+    "effector": "^22.1.2",
+    "effector-react": "^22.0.4",
     "find-free-ports": "^3.0.0",
+    "ink": "^3.2.0",
+    "ink-progress-bar": "^3.0.0",
+    "ink-spinner": "^4.0.3",
     "merge-deep": "^3.0.3",
+    "patronum": "^1.1.0",
+    "react": "^17.0.2",
     "webpack": "^5.61.0",
     "zx": "^4.2.0"
   }

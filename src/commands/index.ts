@@ -1,7 +1,0 @@
-import './bootstrap'
-import './bootstrap:prod'
-import './generate'
-import './install'
-import './pull'
-import './start'
-import './start:prod'

@@ -17,6 +17,7 @@ export async function findFreePort({ book = true }: FindFreePortOptions = {}) {
   const [port] = await findFreePorts(1, {
     startPort,
     endPort,
+    jobCount: 1,
     isFree: async (port) => {
       if (plannedPorts.has(port)) return false
       return isFreePort(port)
