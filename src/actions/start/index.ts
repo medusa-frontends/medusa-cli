@@ -53,6 +53,7 @@ export async function start({ startScriptKey, prestartScriptKey }: StartOptions)
     const { port } = environment
 
     if (await appHasScript(app, prestartScriptKey)) {
+      appSummaryUpdated({ app, status: 'Running prestart..' })
       const wrapped = await runAppScript(app, prestartScriptKey)
       await wrapped.processPromise()
     }
