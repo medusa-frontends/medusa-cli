@@ -1,6 +1,6 @@
 {
   "name": "@medusa-frontends/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI interface for bootstrapping and managing MFEs",
   "main": "bin/medusa.js",
   "repository": "git@github.com:mfe-playground/medusa-cli.git",
@@ -32,13 +32,13 @@
     "esbuild": "^0.13.9",
     "eslint": "7.10.0",
     "prettier": "2.3.0",
-    "rollup": "^2.59.0",
-    "rollup-plugin-dts": "^4.0.0",
     "rollup-plugin-esbuild": "^4.6.0",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "rollup-plugin-dts": "^4.0.0",
+    "rollup": "^2.59.0",
     "@medusa-frontends/webpack-plugin": "^1.0.0",
     "change-case": "^4.1.2",
     "commander": "^8.3.0",
