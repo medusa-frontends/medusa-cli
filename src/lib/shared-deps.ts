@@ -1,5 +1,5 @@
 import { ExtendedShared, Shared } from '../types'
-import { getAppMeta } from './app-meta'
+import { getAppMeta } from './apps/meta'
 import { AppNotFoundException } from './exceptions'
 
 function toExtended(shared: Shared): ExtendedShared {
@@ -18,18 +18,14 @@ export async function buildFinalShared(app: string) {
   const shared: ExtendedShared = toExtended(config.shared)
   const { dependencies } = packageJson
 
-  return Object.entries(shared).reduce<ExtendedShared>(
-    (acc, [name, options]) => {
-      const hasPackageLocally = name in dependencies
-      if (hasPackageLocally) {
-        acc[name] = {
-          requiredVersion: options.requiredVersion ?? dependencies[name],
-          eager: options.eager ?? true,
-          singleton: options.singleton ?? true,
-        }
-      }
-      return acc
-    },
-    {}
-  )
+  return Object.entries(shared).reduce<ExtendedShared>((acc, [name, options]) => {
+    const hasPackageLocally = name in dependencies
+    if (!hasPackageLocally) return acc
+    acc[name] = {
+      requiredVersion: options.requiredVersion ?? dependencies[name],
+      eager: options.eager ?? true,
+      singleton: options.singleton ?? true,
+    }
+    return acc
+  }, {})
 }

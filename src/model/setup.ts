@@ -1,9 +1,9 @@
-import { createEvent } from 'effector'
-import { combineEvents } from 'patronum'
-
-export const routesSetUp = createEvent()
+import { createEvent, forward } from 'effector'
 
 export const startSetUp = createEvent()
+export const setupFinished = createEvent()
 
-const events = [routesSetUp]
-export const setupFinished = combineEvents({ events })
+forward({
+  from: startSetUp,
+  to: setupFinished,
+})

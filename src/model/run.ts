@@ -1,7 +1,7 @@
 import { program } from 'commander'
 import { createEffect, forward } from 'effector'
+import { log } from './global-logs'
 import { executionFailed } from './lifecycle'
-import { log } from './logs'
 
 export const runProgramFx = createEffect(() => program.parseAsync(process.argv))
 

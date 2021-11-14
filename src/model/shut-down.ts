@@ -1,12 +1,13 @@
 import { createEffect, createEvent, forward } from 'effector'
 import { combineEvents } from 'patronum'
-import { hideStatus } from './status'
 
-const preparationEvents = [hideStatus]
 export const startShutDown = createEvent()
+export const hideStatusOnShutDown = createEvent()
+
+const shutDownEvents = [hideStatusOnShutDown]
 
 const prepareFinished = combineEvents({
-  events: preparationEvents,
+  events: shutDownEvents,
 })
 
 const shutDownFx = createEffect(async () => {
@@ -15,7 +16,7 @@ const shutDownFx = createEffect(async () => {
 
 forward({
   from: startShutDown,
-  to: preparationEvents,
+  to: shutDownEvents,
 })
 
 forward({

@@ -1,12 +1,23 @@
 import { useStore } from 'effector-react'
 import { Box, Text } from 'ink'
 import * as React from 'react'
-import { logs } from '../../model/logs'
+import { $activeLogsApp, $activeLogsLevel, $appLogs } from '../../actions/start/model'
+import { globalLogs } from '../../model/global-logs'
 import { BoxNewline, ScrollableBox } from '../lib'
 
 export const Logs: React.FC = () => {
-  const summary = useStore(logs.summary.registry)
-  const messages = summary.all || []
+  const summary = useStore(globalLogs.registry)
+  const appLogs = useStore($appLogs)
+  const level = useStore($activeLogsLevel)
+  const app = useStore($activeLogsApp)
+
+  const getMessages = () => {
+    if (level === 'summary') return summary.all ?? []
+    if (!app) return []
+    return appLogs[level][app] ?? []
+  }
+
+  const messages = getMessages()
   if (messages.length === 0) return null
 
   return (

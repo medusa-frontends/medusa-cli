@@ -1,4 +1,4 @@
 import React from 'react'
-import { DefaultTemplate } from '../ui/templates'
+import { DefaultTemplate } from '../templates'
 
 export const InstallScreen = () => <DefaultTemplate />

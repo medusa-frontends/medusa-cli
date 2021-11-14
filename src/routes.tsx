@@ -1,27 +1,18 @@
-import { Command, program } from 'commander'
-import React, { useEffect, useState } from 'react'
+import { program } from 'commander'
+import { useStore } from 'effector-react'
+import React from 'react'
 import { generate } from './actions/generate'
 import { install } from './actions/install'
 import { pull } from './actions/pull'
 import { start } from './actions/start'
-import { executionSucceed } from './model'
-import { routesSetUp } from './model/setup'
-import { BootstrapScreen } from './screens/bootstrap'
-import { BootstrapProdScreen } from './screens/bootstrap:prod'
-import { GenerateScreen } from './screens/generate'
-import { InstallScreen } from './screens/install'
-import { PullScreen } from './screens/pull'
-import { StartScreen } from './screens/start'
-import { StartProdScreen } from './screens/start:prod'
+import { $activeRoute, RouteConfig } from './model'
+import { BootstrapScreen } from './ui/screens/bootstrap'
+import { GenerateScreen } from './ui/screens/generate'
+import { InstallScreen } from './ui/screens/install'
+import { PullScreen } from './ui/screens/pull'
+import { StartScreen } from './ui/screens/start'
 
-type Route = {
-  name: string
-  command: Command
-  component: () => JSX.Element
-  action: () => void | Promise<void>
-}
-
-const routes: Route[] = [
+export const routes: RouteConfig[] = [
   {
     name: 'pull',
     command: program.command('pull'),
@@ -53,7 +44,7 @@ const routes: Route[] = [
   {
     name: 'start:prod',
     command: program.command('start:prod'),
-    component: StartProdScreen,
+    component: StartScreen,
     action: () =>
       start({
         startScriptKey: 'start:prod',
@@ -74,7 +65,7 @@ const routes: Route[] = [
   {
     name: 'bootstrap:prod',
     command: program.command('bootstrap:prod'),
-    component: BootstrapProdScreen,
+    component: BootstrapScreen,
     action: async () => {
       await pull()
       await install()
@@ -87,23 +78,13 @@ const routes: Route[] = [
   },
 ]
 
-const Route: React.FC<{ route: Route }> = ({ route }) => {
-  const { command, component: Component, action } = route
-  const [matched, setMatched] = useState(false)
-
-  useEffect(() => {
-    command.action(async () => {
-      setMatched(true)
-      await action()
-      executionSucceed()
-    })
-  }, [command])
-
-  if (!matched) return null
+const Route: React.FC<{ route: RouteConfig }> = ({ route }) => {
+  const activeRoute = useStore($activeRoute)
+  const { name, component: Component } = route
+  if (name !== activeRoute) return null
   return <Component />
 }
 
 export function renderRoutes() {
-  useEffect(routesSetUp, [])
   return routes.map((route) => <Route key={route.name} route={route} />)
 }

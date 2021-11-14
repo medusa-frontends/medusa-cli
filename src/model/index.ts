@@ -1,8 +1,4 @@
 import './init'
 
-export {
-  executionStarted,
-  executionSucceed,
-  executionFailed,
-  executionFinished,
-} from './lifecycle'
+export { $activeRoute, prepareRoutes, RouteConfig } from './routing'
+export { executionStarted, executionSucceed, executionFailed, executionFinished } from './lifecycle'

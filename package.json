@@ -15,7 +15,8 @@
   },
   "scripts": {
     "build": "rollup -c rollup.config.js",
-    "dev": "rollup -c rollup.config.js -w"
+    "dev": "rollup -c rollup.config.js -w",
+    "lint": "eslint src/**/*.{ts,tsx} --fix"
   },
   "devDependencies": {
     "@eslint-kit/eslint-config-base": "^5.0.2",
@@ -23,8 +24,9 @@
     "@eslint-kit/eslint-config-patch": "^1.0.0",
     "@eslint-kit/eslint-config-prettier": "^4.0.0",
     "@eslint-kit/eslint-config-typescript": "^5.1.0",
-    "@types/blessed": "^0.1.19",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/merge-deep": "^3.0.0",
+    "@types/object-hash": "^2.2.1",
     "@types/react": "^17.0.34",
     "@typescript-eslint/parser": "4.15.0",
     "esbuild": "^0.13.9",
@@ -37,7 +39,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@medusa/webpack-plugin": "file:../medusa-webpack-plugin",
+    "@medusa/webpack-plugin": "../medusa-webpack-plugin",
     "change-case": "^4.1.2",
     "commander": "^8.3.0",
     "effector": "^22.1.2",
@@ -46,7 +48,11 @@
     "ink": "^3.2.0",
     "ink-progress-bar": "^3.0.0",
     "ink-spinner": "^4.0.3",
+    "ink-table": "^3.0.0",
+    "ink-text-input": "^4.0.2",
+    "lodash.debounce": "^4.0.8",
     "merge-deep": "^3.0.3",
+    "object-hash": "^2.2.0",
     "patronum": "^1.1.0",
     "react": "^17.0.2",
     "webpack": "^5.61.0",

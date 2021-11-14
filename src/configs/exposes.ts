@@ -1,13 +1,14 @@
 import { OutputAsset, OutputChunk, rollup } from 'rollup'
 import dts from 'rollup-plugin-dts'
 import 'zx/globals'
-import { getAppMeta } from '../lib/app-meta'
+import { FileNames } from '../constants'
+import { foreachApp } from '../lib/apps/foreach'
+import { getAppMeta } from '../lib/apps/meta'
 import { readCLIConfig } from '../lib/config'
 import { AppNotFoundException } from '../lib/exceptions'
-import { foreachApp } from '../lib/foreach-app'
 import { readJson, ROOT } from '../lib/fs'
-import { TEMP_FOLDER_NAME, withTempFolder } from '../lib/temp-folder'
-import { log } from '../model/logs'
+import { withTempFolder } from '../lib/temp-folder'
+import { log } from '../model/global-logs'
 import { TSConfig } from '../types'
 
 async function generateRequiresMap() {
@@ -59,9 +60,7 @@ async function bundleTypes(
     format: 'es',
   })
 
-  const isChunk = (
-    artifact: OutputChunk | OutputAsset
-  ): artifact is OutputChunk => {
+  const isChunk = (artifact: OutputChunk | OutputAsset): artifact is OutputChunk => {
     return artifact.type === 'chunk'
   }
 
@@ -76,9 +75,7 @@ async function getExposesPaths(app: string): Promise<string[]> {
   if (!meta) throw new AppNotFoundException(app)
   const extensions = ['.ts', '.tsx']
   const { exposesPath } = meta.config
-  const hasExtension = extensions.some((extension) =>
-    exposesPath.endsWith(extension)
-  )
+  const hasExtension = extensions.some((extension) => exposesPath.endsWith(extension))
   const full = (end: string) => path.join(ROOT, app, end)
   if (hasExtension) return [full(exposesPath)]
   return extensions.map((extension) => full(exposesPath + extension))
@@ -98,7 +95,7 @@ const warnedApps = new Set<string>()
 function hasTempFolderInTypeRoots(app: string, tsconfig: TSConfig) {
   const { typeRoots = [] } = tsconfig.compilerOptions ?? {}
   const basePath = path.join(ROOT, app)
-  const tempFolderPath = path.join(basePath, TEMP_FOLDER_NAME)
+  const tempFolderPath = path.join(basePath, FileNames.TempFolder)
   return typeRoots.some((relative) => {
     const typeRootPath = path.join(basePath, relative)
     return typeRootPath === tempFolderPath
@@ -114,7 +111,7 @@ async function assertTypeRoots(app: string) {
   if (hasTempFolderInTypeRoots(app, tsconfig)) return
   log(
     `[Warning] The app "${app}" tsconfig "typeRoots" field` +
-      ` doesn't include "${TEMP_FOLDER_NAME}" directory`
+      ` doesn't include "${FileNames.TempFolder}" directory`
   )
   warnedApps.add(app)
 }

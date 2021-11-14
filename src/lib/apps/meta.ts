@@ -1,7 +1,7 @@
 import 'zx/globals'
-import { AppMeta, PackageJson } from '../types'
-import { readAppConfig, readCLIConfig } from './config'
-import { readJson, ROOT } from './fs'
+import { AppMeta, PackageJson } from '../../types'
+import { readAppConfig, readCLIConfig } from '../config'
+import { readJson, ROOT } from '../fs'
 
 type PassedFields = Partial<AppMeta>
 
@@ -32,9 +32,7 @@ export async function getAppMeta(
     return null
   }
 
-  const packageJson = await readJson<PackageJson>(
-    path.join(appPath, 'package.json')
-  )
+  const packageJson = await readJson<PackageJson>(path.join(appPath, 'package.json'))
 
   if (!packageJson) {
     return null
@@ -56,9 +54,7 @@ type AppsMeta<T extends string> = {
   [key in T]: AppMeta | null
 }
 
-export async function getAppsMeta<T extends string>(
-  apps: T[]
-): Promise<AppsMeta<T>> {
+export async function getAppsMeta<T extends string>(apps: T[]): Promise<AppsMeta<T>> {
   const result: Partial<AppsMeta<T>> = {}
   const promises = apps.map(async (app) => {
     const meta = await getAppMeta(app)

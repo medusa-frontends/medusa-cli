@@ -1,6 +1,6 @@
+import { foreachApp } from '../lib/apps/foreach'
 import { readCLIConfig } from '../lib/config'
-import { foreachApp } from '../lib/foreach-app'
-import { showStatus } from '../model/status'
+import { hideStatus, showStatus } from '../model/status'
 
 export async function install() {
   const { apps } = await readCLIConfig()
@@ -13,4 +13,6 @@ export async function install() {
       await $`cd ${app}; yarn install`
     },
   })
+
+  hideStatus()
 }

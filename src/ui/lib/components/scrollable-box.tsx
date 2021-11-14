@@ -1,5 +1,6 @@
 import { Box, DOMElement, Text, useInput } from 'ink'
 import React, { useEffect, useRef, useState } from 'react'
+import { useStdoutDimensions } from '../hooks'
 
 type Scroll = number | '100%'
 
@@ -47,11 +48,7 @@ type Props = {
   initialScroll?: Scroll
 } & BaseProps
 
-export const ScrollableBox: React.FC<Props> = ({
-  text,
-  initialScroll = 0,
-  ...rest
-}) => {
+export const ScrollableBox: React.FC<Props> = ({ text, initialScroll = 0, ...rest }) => {
   const yogaRef = useRef<DOMElement | null>(null)
   const [scroll, setScroll] = useState<Scroll>(initialScroll)
   const [maxScroll, setMaxScroll] = useState<number>(Number.POSITIVE_INFINITY)
@@ -64,6 +61,7 @@ export const ScrollableBox: React.FC<Props> = ({
       scroll: 0,
     })
   )
+  const { width, height } = useStdoutDimensions()
 
   useEffect(() => {
     const yogaNode = yogaRef.current?.yogaNode
@@ -96,7 +94,7 @@ export const ScrollableBox: React.FC<Props> = ({
     if (scroll > maxScroll) setScroll(maxScroll)
     if (scroll === maxScroll) setScroll('100%')
     setFingerprint(nextFingerprint)
-  }, [text, scroll])
+  }, [text, scroll, width, height])
 
   useInput((_, key) => {
     if (!key.upArrow) return

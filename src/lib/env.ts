@@ -1,4 +1,4 @@
-import { getAppMeta } from './app-meta'
+import { getAppMeta } from './apps/meta'
 import { AppNotFoundException } from './exceptions'
 
 export async function buildEnvString(app: string) {

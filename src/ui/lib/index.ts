@@ -1,3 +1,3 @@
-export { ScrollableBox } from './scrollable-box'
-export { BoxNewline } from './box-newline'
+export { ScrollableBox } from './components/scrollable-box'
+export { BoxNewline } from './components/box-newline'
 export * from './hooks'

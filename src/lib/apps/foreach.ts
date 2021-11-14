@@ -1,7 +1,7 @@
 import 'zx/globals'
-import { AppMeta } from '../types'
-import { getAppMeta } from './app-meta'
-import { AppNotFoundException } from './exceptions'
+import { AppMeta } from '../../types'
+import { getAppMeta } from './meta'
+import { AppNotFoundException } from '../exceptions'
 
 type ForeachAppOptions = {
   apps: string[]

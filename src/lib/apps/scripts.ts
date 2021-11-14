@@ -1,9 +1,9 @@
 import 'zx/globals'
-import { ScriptKey } from '../types'
-import { getAppMeta } from './app-meta'
-import { buildEnvString } from './env'
-import { AppNotFoundException } from './exceptions'
-import { withoutQuotes, wrapZX } from './zx'
+import { ScriptKey } from '../../types'
+import { buildEnvString } from '../env'
+import { AppNotFoundException } from '../exceptions'
+import { withoutQuotes, wrapZX } from '../zx'
+import { getAppMeta } from './meta'
 
 export async function mapScriptKey(app: string, scriptKey: ScriptKey) {
   const meta = await getAppMeta(app)
@@ -32,18 +32,12 @@ export async function getAppScript(app: string, scriptKey: ScriptKey) {
   return mapScriptKey(app, scriptKey)
 }
 
-export async function runAppScript(
-  app: string,
-  scriptKey: ScriptKey,
-  options: Options = {}
-) {
+export async function runAppScript(app: string, scriptKey: ScriptKey, options: Options = {}) {
   const envString = await buildEnvString(app)
   const script = await getAppScript(app, scriptKey)
 
   return withoutQuotes(() => {
-    return wrapZX(
-      $`${envString} cd ${app}; yarn ${script} ${stringifyOptions(options)}`
-    )
+    return wrapZX($`${envString} cd ${app}; yarn ${script} ${stringifyOptions(options)}`)
   })
 }
 
