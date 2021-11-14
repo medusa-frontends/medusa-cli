@@ -1,6 +1,6 @@
 {
-  "name": "@medusa/cli",
-  "version": "0.0.0",
+  "name": "@medusa-frontends/cli",
+  "version": "1.0.0",
   "description": "A CLI interface for bootstrapping and managing MFEs",
   "main": "bin/medusa.js",
   "repository": "git@github.com:mfe-playground/medusa-cli.git",
@@ -39,7 +39,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@medusa/webpack-plugin": "../medusa-webpack-plugin",
+    "@medusa-frontends/webpack-plugin": "^1.0.0",
     "change-case": "^4.1.2",
     "commander": "^8.3.0",
     "effector": "^22.1.2",

@@ -34,7 +34,7 @@ async function readFinalConfig<T extends CLIConfig | AppConfig>({
 
 export const readCLIConfig = () =>
   readFinalConfig<CLIConfig>({
-    name: 'mfe-cli',
+    name: 'medusa',
     default: {
       host: 'mfe-app-host',
       apps: [],
@@ -47,7 +47,7 @@ export const readCLIConfig = () =>
 
 export const readAppConfig = (app: string) =>
   readFinalConfig<AppConfig>({
-    name: 'mfe-app',
+    name: 'app.medusa',
     directory: path.join(ROOT, app),
     default: {
       requires: [],
