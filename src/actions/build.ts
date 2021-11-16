@@ -22,8 +22,6 @@ export async function build({ buildScriptKey, prebuildScriptKey }: BuildOptions)
     const environment = await readEnvironment(app)
     if (!environment) throw new EnvironmentNotFoundException(app)
 
-    const { port } = environment
-
     if (await appHasScript(app, prebuildScriptKey)) {
       showStatus({ text: `Running prebuild for "${app}"..` })
       const wrapped = await runAppScript(app, prebuildScriptKey)
@@ -31,7 +29,7 @@ export async function build({ buildScriptKey, prebuildScriptKey }: BuildOptions)
     }
 
     showStatus({ text: `Building "${app}"..` })
-    const wrapped = await runAppScript(app, buildScriptKey, { port })
+    const wrapped = await runAppScript(app, buildScriptKey)
     await wrapped.processPromise()
   }
 
