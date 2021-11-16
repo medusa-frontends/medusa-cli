@@ -3,7 +3,7 @@
   "version": "1.1.1",
   "description": "A CLI interface for bootstrapping and managing MFEs",
   "main": "bin/medusa.js",
-  "repository": "git@github.com:mfe-playground/medusa-cli.git",
+  "repository": "git@github.com:medusa-frontends/medusa-cli.git",
   "author": "Evgeny Zakharov <risenforces@gmail.com>",
   "license": "MIT",
   "engines": {
