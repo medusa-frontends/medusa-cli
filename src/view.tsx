@@ -1,6 +1,7 @@
 import { Box } from 'ink'
 import React from 'react'
-import { renderRoutes } from './routes'
+import { routes } from './routes'
+import { renderRoutes } from './ui/features/routing'
 import { useStdoutDimensions } from './ui/lib'
 
 export const View: React.FC = () => {
@@ -8,7 +9,7 @@ export const View: React.FC = () => {
 
   return (
     <Box width={width} height={height} padding={1} flexDirection="column">
-      {renderRoutes()}
+      {renderRoutes(routes)}
     </Box>
   )
 }

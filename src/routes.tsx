@@ -1,12 +1,10 @@
 import { program } from 'commander'
-import { useStore } from 'effector-react'
-import React from 'react'
 import { build } from './actions/build'
 import { generate } from './actions/generate'
 import { install } from './actions/install'
 import { pull } from './actions/pull'
 import { start } from './actions/start'
-import { $activeRoute, RouteConfig } from './model'
+import { RouteConfig } from './model'
 import { BootstrapScreen } from './ui/screens/bootstrap'
 import { BuildScreen } from './ui/screens/build'
 import { GenerateScreen } from './ui/screens/generate'
@@ -133,14 +131,3 @@ export const routes: RouteConfig[] = [
     },
   },
 ]
-
-const Route: React.FC<{ route: RouteConfig }> = ({ route }) => {
-  const activeRoute = useStore($activeRoute)
-  const { name, component: Component } = route
-  if (name !== activeRoute) return null
-  return <Component />
-}
-
-export function renderRoutes() {
-  return routes.map((route) => <Route key={route.name} route={route} />)
-}
