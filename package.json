@@ -1,6 +1,6 @@
 {
   "name": "@medusa-frontends/cli",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A CLI interface for bootstrapping and managing MFEs",
   "main": "bin/medusa.js",
   "repository": "git@github.com:mfe-playground/medusa-cli.git",
