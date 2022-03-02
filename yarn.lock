@@ -323,10 +323,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@medusa-frontends/webpack-plugin@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@medusa-frontends/webpack-plugin/-/webpack-plugin-1.0.0.tgz#7e6ce754c2987e0b19a13cf7387a51af27c8aae8"
-  integrity sha512-50uMWk0Bqx/mKtHKuXezcdwqQBn1ZLdPnqHSQ26gZwhVUKQoFvMRwwFDy0TgGoJBHeBIWMgu8ZaLYqEoS813Xg==
+"@medusa/webpack-plugin@^1.0.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@medusa/webpack-plugin/-/webpack-plugin-1.1.0.tgz#08a9247f472751c1dd2c4e695a2f355918bbe883"
+  integrity sha512-q9NY/2s9VetqAqmLBTd9iCnGAWJMaqZ9Is9ob6rJyoBLkHxVQGNZDC8YQMzZGKpFaiGzCSyT58cgaWH8ITbCcQ==
   dependencies:
     find-package-json "^1.2.0"
     webpack "^5.61.0"

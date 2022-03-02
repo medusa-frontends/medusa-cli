@@ -1,6 +1,6 @@
-# @medusa-frontends/cli
+# @medusa/cli
 
 ```sh
 medusa <command> [...options]
-npx @medusa-frontends/cli <command> [...options]
+npx @medusa/cli <command> [...options]
 ```

@@ -1,5 +1,5 @@
 {
-  "name": "@medusa-frontends/cli",
+  "name": "@medusa/cli",
   "version": "1.1.1",
   "description": "A CLI interface for bootstrapping and managing MFEs",
   "main": "bin/medusa.js",
@@ -39,7 +39,7 @@
   "dependencies": {
     "rollup-plugin-dts": "^4.0.0",
     "rollup": "^2.59.0",
-    "@medusa-frontends/webpack-plugin": "^1.0.0",
+    "@medusa/webpack-plugin": "^1.0.0",
     "change-case": "^4.1.2",
     "commander": "^8.3.0",
     "effector": "^22.1.2",

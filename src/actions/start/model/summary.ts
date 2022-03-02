@@ -1,4 +1,4 @@
-import { MESSAGES } from '@medusa-frontends/webpack-plugin'
+import { MESSAGES } from '@medusa/webpack-plugin'
 import { combine, createEvent, createStore, guard, sample } from 'effector'
 import { appLogReceived, $appLogs } from './logs'
 
