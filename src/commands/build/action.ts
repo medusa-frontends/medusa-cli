@@ -1,12 +1,12 @@
 import 'zx/globals'
-import { readEnvironment } from '../configs/environment'
-import { foreachApp } from '../lib/apps/foreach'
-import { appHasScript, runAppScript } from '../lib/apps/scripts'
-import { readCLIConfig } from '../lib/config'
-import { EnvironmentNotFoundException } from '../lib/exceptions'
-import { showStatus } from '../model/status'
-import { AppMeta, ScriptKey } from '../types'
-import { generate } from './generate'
+import { readEnvironment } from '../../configs/environment'
+import { foreachApp } from '../../lib/apps/foreach'
+import { appHasScript, runAppScript } from '../../lib/apps/scripts'
+import { readCLIConfig } from '../../lib/config'
+import { EnvironmentNotFoundException } from '../../lib/exceptions'
+import { showStatus } from '../../model/status'
+import { AppMeta, ScriptKey } from '../../types'
+import { generate } from '../generate'
 
 type BuildOptions = {
   buildScriptKey: ScriptKey

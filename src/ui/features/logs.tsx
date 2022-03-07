@@ -1,7 +1,7 @@
 import { useStore } from 'effector-react'
 import { Box, Text } from 'ink'
 import * as React from 'react'
-import { $activeLogsApp, $activeLogsLevel, $appLogs } from '../../actions/start/model'
+import { $activeLogsApp, $activeLogsLevel, $appLogs } from '../../commands/start/model'
 import { globalLogs } from '../../model/global-logs'
 import { BoxNewline, ScrollableBox } from '../lib'
 
