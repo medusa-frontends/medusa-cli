@@ -1,3 +1,4 @@
+import { Command } from 'commander'
 import { container } from 'webpack'
 
 export type Json = {
@@ -84,4 +85,11 @@ export type AppMeta = {
   config: AppConfig
   branch?: string
   requiredFor?: string
+}
+
+export type Route = {
+  name: string
+  command: Command
+  component: () => JSX.Element
+  action: () => void | Promise<void>
 }
