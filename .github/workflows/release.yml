@@ -2,7 +2,7 @@ name: Release
 
 on:
   release:
-    types: [created]
+    types: [created, released]
 
 jobs:
   - name: Extract version
