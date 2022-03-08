@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
+import { realStringLength } from '@app/lib/real-string-length'
 import { Box, Text } from 'ink'
 import { sha1 } from 'object-hash'
 import React from 'react'
-import { realStringLength } from '../../../lib/real-string-length'
 
 /* Table */
 

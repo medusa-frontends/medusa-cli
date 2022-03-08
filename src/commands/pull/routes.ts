@@ -1,6 +1,6 @@
 import { program } from 'commander'
 import { Route } from '../../types'
-import { PullScreen } from '../../ui/screens/pull'
+import { PullScreen } from '@app/ui/screens/pull'
 import { pull } from './action'
 
 export const ROUTES: Route[] = [

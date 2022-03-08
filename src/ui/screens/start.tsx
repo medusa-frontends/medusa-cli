@@ -1,10 +1,9 @@
+import { $appSummary, commandReceived } from '@app/commands/start/model'
 import { useStore } from 'effector-react'
 import { Box, Text } from 'ink'
 import TextInput from 'ink-text-input'
 import React, { useState } from 'react'
-import { $appSummary, commandReceived } from '../../commands/start/model'
-import { BoxNewline } from '../lib'
-import { Table } from '../lib/components/table'
+import { BoxNewline, Table } from '../lib'
 import { DefaultTemplate } from '../templates'
 
 const $formattedSummary = $appSummary.map((summary) => {

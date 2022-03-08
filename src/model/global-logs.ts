@@ -1,5 +1,5 @@
-import { getCommandOptions } from '../lib/command-options'
-import { createLogs } from '../lib/logs'
+import { getCommandOptions } from '@app/lib/command-options'
+import { createLogs } from '@app/lib/logs'
 
 export const globalLogs = createLogs<'all'>()
 

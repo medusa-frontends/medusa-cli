@@ -1,5 +1,5 @@
 import { combine, createEvent, createStore, sample, split } from 'effector'
-import { createLogs } from '../../../lib/logs'
+import { createLogs } from '@app/lib/logs'
 import { errorsForAppRequested, infoForAppRequested, summaryRequested } from './commands'
 
 export type LogLevel = 'summary' | 'info' | 'error'

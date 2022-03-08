@@ -1,6 +1,6 @@
 import { program } from 'commander'
 import { Route } from '../../types'
-import { InstallScreen } from '../../ui/screens/install'
+import { InstallScreen } from '@app/ui/screens/install'
 import { install } from './action'
 
 export const ROUTES: Route[] = [

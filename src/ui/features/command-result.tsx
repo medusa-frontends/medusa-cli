@@ -1,10 +1,10 @@
+import { $commandResult } from '@app/model/command-result'
+import { $status } from '@app/model/status'
 import { useStore } from 'effector-react'
 import { Box, Text } from 'ink'
 import ProgressBar from 'ink-progress-bar'
 import Spinner from 'ink-spinner'
 import React from 'react'
-import { $commandResult } from '../../model/command-result'
-import { $status } from '../../model/status'
 import { BoxNewline } from '../lib'
 
 export const Content: React.FC = () => {

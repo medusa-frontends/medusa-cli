@@ -1,9 +1,9 @@
+import { foreachApp } from '@app/lib/apps/foreach'
+import { readCLIConfig } from '@app/lib/config'
+import { bookPort, findFreePort } from '@app/lib/ports'
+import { withTempFolder } from '@app/lib/temp-folder'
 import { snakeCase } from 'snake-case'
 import { FileNames } from '../constants'
-import { foreachApp } from '../lib/apps/foreach'
-import { readCLIConfig } from '../lib/config'
-import { bookPort, findFreePort } from '../lib/ports'
-import { withTempFolder } from '../lib/temp-folder'
 
 export type Environment = {
   https: boolean
