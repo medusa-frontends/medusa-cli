@@ -1,10 +1,10 @@
-import { generateEnvironment } from '../../configs/environment'
-import { generateExposesTypes } from '../../configs/exposes'
-import { generatePluginOptions } from '../../configs/plugin-options'
-import { foreachApp } from '../../lib/apps/foreach'
-import { appHasScript, getAppScript, runAppScript } from '../../lib/apps/scripts'
-import { readCLIConfig } from '../../lib/config'
-import { hideStatus, showStatus } from '../../model/status'
+import { generateEnvironment } from '@app/configs/environment'
+import { generateExposesTypes } from '@app/configs/exposes'
+import { generatePluginOptions } from '@app/configs/plugin-options'
+import { foreachApp } from '@app/lib/apps/foreach'
+import { appHasScript, getAppScript, runAppScript } from '@app/lib/apps/scripts'
+import { readCLIConfig } from '@app/lib/config'
+import { hideStatus, showStatus } from '@app/model/status'
 
 async function runGenerateScripts() {
   const { apps } = await readCLIConfig()

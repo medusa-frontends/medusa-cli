@@ -9,6 +9,22 @@
   "parser": "@typescript-eslint/parser",
   "rules": {
     "no-console": "off",
-    "@typescript-eslint/consistent-type-definitions": ["warn", "type"]
+    "@typescript-eslint/consistent-type-definitions": [
+      "warn",
+      "type"
+    ]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [
+        ".ts",
+        ".tsx"
+      ]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
   }
 }

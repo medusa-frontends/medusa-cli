@@ -1,6 +1,6 @@
+import { Route } from '@app/types'
 import { program } from 'commander'
-import { Route } from '../../types'
-import { BootstrapScreen } from '../../ui/screens/bootstrap'
+import { BootstrapScreen } from '@app/ui/screens/bootstrap'
 import { generate } from '../generate'
 import { install } from '../install'
 import { pull } from '../pull'

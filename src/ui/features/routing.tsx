@@ -1,6 +1,6 @@
+import { $activeRoute, RouteConfig } from '@app/model'
 import { useStore } from 'effector-react'
 import React from 'react'
-import { $activeRoute, RouteConfig } from '../../model'
 
 const Route: React.FC<{ route: RouteConfig }> = ({ route }) => {
   const activeRoute = useStore($activeRoute)

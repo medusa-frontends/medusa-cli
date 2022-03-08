@@ -1,6 +1,6 @@
-import { foreachApp } from '../../lib/apps/foreach'
-import { readCLIConfig } from '../../lib/config'
-import { hideStatus, showStatus } from '../../model/status'
+import { foreachApp } from '@app/lib/apps/foreach'
+import { readCLIConfig } from '@app/lib/config'
+import { hideStatus, showStatus } from '@app/model/status'
 
 export async function install() {
   const { apps } = await readCLIConfig()
