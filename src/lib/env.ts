@@ -6,9 +6,6 @@ export async function buildEnvString(app: string) {
   if (!meta) throw new AppNotFoundException(app)
 
   return Object.entries(meta.config.env)
-    .reduce<string[]>((acc, [key, value]) => {
-      acc.push(`${key}='${value}'`)
-      return acc
-    }, [])
+    .map(([key, value]) => `${key}='${value}'`)
     .join(' ')
 }
